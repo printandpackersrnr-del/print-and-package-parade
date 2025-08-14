@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { useCart } from "@/hooks/useCart";
+import { toast } from "@/hooks/use-toast";
 
 interface ProductCardProps {
   title: string;
@@ -9,6 +11,21 @@ interface ProductCardProps {
 }
 
 export const ProductCard = ({ title, price, image, description }: ProductCardProps) => {
+  const { addToCart, setIsCartOpen } = useCart();
+
+  const handleAddToCart = () => {
+    addToCart({ title, price, image });
+    toast({
+      title: "Added to cart",
+      description: `${title} has been added to your cart.`,
+    });
+  };
+
+  const handleBuyNow = () => {
+    addToCart({ title, price, image });
+    setIsCartOpen(true);
+  };
+
   return (
     <Card className="group overflow-hidden transition-all duration-300 hover:shadow-product hover:-translate-y-1 animate-scale-in">
       <CardContent className="p-0">
@@ -27,10 +44,10 @@ export const ProductCard = ({ title, price, image, description }: ProductCardPro
         </div>
       </CardContent>
       <CardFooter className="p-6 pt-0 gap-3">
-        <Button variant="outline" className="flex-1">
+        <Button variant="outline" className="flex-1" onClick={handleAddToCart}>
           Add to Cart
         </Button>
-        <Button className="flex-1 bg-gradient-primary hover:opacity-90 transition-opacity">
+        <Button className="flex-1 bg-gradient-primary hover:opacity-90 transition-opacity" onClick={handleBuyNow}>
           Buy Now
         </Button>
       </CardFooter>

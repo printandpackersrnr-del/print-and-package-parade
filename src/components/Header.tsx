@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Phone, MapPin } from "lucide-react";
+import { CartSidebar } from "@/components/CartSidebar";
 
 export const Header = () => {
   return (
@@ -27,9 +28,12 @@ export const Header = () => {
             </div>
           </div>
           
-          <Button className="bg-gradient-primary hover:opacity-90 transition-opacity">
-            Contact Us
-          </Button>
+          <div className="flex items-center space-x-4">
+            <CartSidebar />
+            <Button className="bg-gradient-primary hover:opacity-90 transition-opacity">
+              Contact Us
+            </Button>
+          </div>
         </div>
       </div>
     </header>
